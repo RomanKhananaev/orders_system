@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserApiService } from '../services/user-api.service';
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  userList: any;
+
+  tabs = [
+    { id: 1, text: "Admin" },
+    { id: 2, text: "User" },
+  ];
+  constructor(private userService: UserApiService) { }
 
   ngOnInit(): void {
+    this.userService.GetUsersByRole(1).subscribe(res => {
+      this.userList = res;
+    })
   }
 
+  debug(e: any) {
+    this.userService.GetUsersByRole(e.itemData.id).subscribe(res => {
+      this.userList = res;
+    })
+  }
 }

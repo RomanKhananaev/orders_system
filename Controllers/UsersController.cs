@@ -25,15 +25,19 @@ namespace orders_system.Controllers
             {
                 return BadRequest("User name or password wrong");
             }
-            else
-            {
-                return Ok(user);
-            }
+
+            return Ok(user);
+            
         }
 
         [HttpPost("GetUsersByRole/{roleId}")]
         public async Task<ActionResult> GetUsersByRole(int roleId)
         {
+            var role = _db.UserRoleTypes.FirstOrDefault(x => x.Id == roleId);
+            if(role == null)
+            {
+                return BadRequest("RoleId is wrong");
+            }
             var userList = _db.Users.Where(x => x.UserRoleId == roleId)
                 .Select(x => new
                 {

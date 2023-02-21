@@ -13,16 +13,13 @@ export class LoginComponent implements OnInit {
     userName: 'rom',
     password: '15423562'
   }
-  data: any;
+
   constructor(
     private userService: UserApiService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.userService.GetUsersByRole(1).subscribe(res => {
-      console.log("Users with role '1':", res);
-    })
   }
 
 

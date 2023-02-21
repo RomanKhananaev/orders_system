@@ -1,1 +1,17 @@
-<p>user-list works!</p>
+<div *ngIf="userList">
+  <dx-tabs class="tabs" #apiTabs
+           [dataSource]="tabs"
+           [selectedIndex]="1"
+           (onItemClick)="debug($event)"></dx-tabs>
+  <dx-data-grid id="gridContainer"
+                [dataSource]="userList"
+                [remoteOperations]="false"
+                [allowColumnReordering]="true"
+                [rowAlternationEnabled]="false"
+                [showBorders]="true">
+
+    <dxi-column dataField="id" alignment="left"></dxi-column>
+    <dxi-column dataField="userName"></dxi-column>
+    <dxi-column dataField="email"></dxi-column>
+  </dx-data-grid>
+</div>
