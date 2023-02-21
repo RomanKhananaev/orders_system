@@ -1,0 +1,24 @@
+<div class="login-form">
+  <h3>Login</h3>
+  <div class="form">
+    <div class="dx-fieldset">
+      <div class="dx-field">
+          <dx-text-box placeholder="User name"
+                       [(value)]="loginUser.userName"></dx-text-box>
+      </div>
+      <div class="dx-field">
+          <dx-text-box mode="password"
+                       placeholder="Password"
+                       [showClearButton]="true"
+                       [(value)]="loginUser.password"
+                       (onKeyDown)="login()"></dx-text-box>
+      </div>
+    </div>
+    </div>
+  <dx-button stylingMode="contained"
+             text="Login"
+             [width]="120"
+             (onClick)="login()">
+  </dx-button>
+</div>
+

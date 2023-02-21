@@ -1,0 +1,31 @@
+.login-form {
+  padding: 20px 20px;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  border: 7px solid #ffa500;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 300px;
+  flex-direction: column;
+}
+.form{
+    width:80%;
+}
+
+dx-button {
+  background-color: #ffa500;
+  color: white;
+  font-weight: bold;
+}
+  dx-button:hover {
+    background-color: #ff8100;
+  }
+  dx-button: {
+    background-color: #ff8100;
+  }
+
+.dx-button-mode-contained.dx-state-focused {
+  background-color: #ffa500;
+}
