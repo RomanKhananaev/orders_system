@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace orders_system.Models
 {
-    public partial class UserRoleType
+    public partial class Order
     {
-        public UserRoleType()
+        public Order()
         {
             Users = new HashSet<User>();
         }
@@ -18,11 +18,14 @@ namespace orders_system.Models
         [Key]
         [Column("id")]
         public int Id { get; set; }
-        [Column("description")]
-        [StringLength(50)]
-        public string Description { get; set; } = null!;
+        [Column("date", TypeName = "date")]
+        public DateTime Date { get; set; }
+        [Column("total_price")]
+        public double TotalPrice { get; set; }
+        [Column("user_id")]
+        public int UserId { get; set; }
 
-        [InverseProperty("UserRoleNavigation")]
+        [InverseProperty("UserRole")]
         public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -2,5 +2,10 @@
   <!--<app-nav-menu></app-nav-menu>-->
   <div class="container">
     <router-outlet></router-outlet>
+
   </div>
+  <dx-load-indicator [visible]="loadIndicator.visibleIndicator"
+                     id="large-indicator"
+                     height="60"
+                     width="60"></dx-load-indicator>
 </body>

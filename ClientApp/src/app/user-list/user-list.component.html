@@ -1,8 +1,8 @@
 <div *ngIf="userList">
   <dx-tabs class="tabs" #apiTabs
            [dataSource]="tabs"
-           [selectedIndex]="1"
-           (onItemClick)="debug($event)"></dx-tabs>
+           [selectedIndex]="0"
+           (onItemClick)="GetUsersByRole($event)"></dx-tabs>
   <dx-data-grid id="gridContainer"
                 [dataSource]="userList"
                 [remoteOperations]="false"
@@ -15,3 +15,4 @@
     <dxi-column dataField="email"></dxi-column>
   </dx-data-grid>
 </div>
+

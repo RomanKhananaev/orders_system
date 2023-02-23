@@ -14,6 +14,7 @@ namespace orders_system.Models
         {
         }
 
+        public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRoleType> UserRoleTypes { get; set; } = null!;
 
@@ -22,6 +23,11 @@ namespace orders_system.Models
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasOne(d => d.UserRole)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.UserRoleId)
+                    .HasConstraintName("FK_Users_Orders");
+
+                entity.HasOne(d => d.UserRoleNavigation)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.UserRoleId)
                     .HasConstraintName("FK_Users_UserRoleTypes");

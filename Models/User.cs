@@ -27,6 +27,9 @@ namespace orders_system.Models
 
         [ForeignKey("UserRoleId")]
         [InverseProperty("Users")]
-        public virtual UserRoleType? UserRole { get; set; }
+        public virtual Order? UserRole { get; set; }
+        [ForeignKey("UserRoleId")]
+        [InverseProperty("Users")]
+        public virtual UserRoleType? UserRoleNavigation { get; set; }
     }
 }
