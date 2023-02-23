@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DevExtremeModule } from 'devextreme-angular';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UserListComponent } from './user-list/user-list.component';
     HomeComponent,
     LoginComponent,
     UserListComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,6 +30,7 @@ import { UserListComponent } from './user-list/user-list.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'users', component: UserListComponent },
+      { path: 'users/:userId', component: UserComponent },
     ])
   ],
   providers: [],

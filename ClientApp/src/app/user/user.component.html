@@ -1,0 +1,49 @@
+<h1>User's orders</h1>
+<div class="row mb-2">
+  <div class="col-2">
+    <div class="dx-field">
+      <div class="dx-field-label">From</div>
+      <div class="dx-field-value">
+        <dx-date-box [(value)]="fromDate" type="date" displayFormat="dd/MM/yyyy" dateSerializationFormat="yyyy-MM-dd"> </dx-date-box>
+      </div>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="dx-field">
+      <div class="dx-field-label">To</div>
+      <div class="dx-field-value">
+        <dx-date-box [(value)]="toDate" type="date" displayFormat="dd/MM/yyyy" dateSerializationFormat="yyyy-MM-dd"> </dx-date-box>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <dx-button stylingMode="contained"
+               text="GetOrderSum"
+               [width]="150"
+               (onClick)="GetOrderSum()">
+    </dx-button>
+  </div>
+  <div class="col-4">
+    <dx-button stylingMode="contained"
+               text="GetOrders"
+               [width]="120"
+               (onClick)="GetOrders()"
+               class="right">
+    </dx-button>
+  </div>
+</div>
+
+  <dx-data-grid id="gridContainer"
+                [dataSource]="loadedOrders"
+                [remoteOperations]="false"
+                [allowColumnReordering]="true"
+                [rowAlternationEnabled]="false"
+                [showBorders]="true">
+
+    <dxi-column dataField="id" alignment="left" caption="No"></dxi-column>
+    <dxi-column dataField="date" dataType="date" format="dd/MM/yyyy"></dxi-column>
+    <dxi-column dataField="totalPrice" alignment="left"></dxi-column>
+  </dx-data-grid>
+  <div class="mt-2 ml-2" *ngIf="orderSum != 0">
+    Get Orders Sum: {{orderSum}}
+  </div>

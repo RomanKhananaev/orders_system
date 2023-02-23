@@ -15,4 +15,10 @@ export class UserApiService {
   GetUsersByRole(roleId: number) {
     return this.http.post<any>(this.APIUrl + `/users/GetUsersByRole/${roleId}`, {});
   }
+  GetOrders(userId: number) {
+    return this.http.post<any>(this.APIUrl + `/users/GetOrders/${userId}`, {});
+  }
+  GetOrdersSum(OrderSumObj: any) {
+    return this.http.post<any>(this.APIUrl + `/users/GetOrdersSum`, OrderSumObj);
+  }
 }

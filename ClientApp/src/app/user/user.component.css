@@ -1,0 +1,42 @@
+ 
+h1 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+h4 {
+  margin-top: 30px;
+}
+.dx-field-label{
+    text-align:end;
+    width: 25%;
+}
+
+.dx-field-value-static, .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button) {
+  width: 75%;
+}
+
+.lable {
+  width: 100%;
+}
+dx-button {
+  background-color: #ffa500;
+  color: white;
+  font-weight: bold;
+}
+
+  dx-button:hover {
+    background-color: #ff8100;
+  }
+
+  dx-button: {
+    background-color: #ff8100;
+  }
+
+.dx-button-mode-contained.dx-state-focused {
+  background-color: #ffa500;
+}
+
+.right{
+    float:right;
+}
