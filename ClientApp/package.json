@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~12.2.2",
     "@angular/platform-server": "~12.2.2",
     "@angular/router": "~12.2.2",
+    "@auth0/angular-jwt": "^5.1.2",
     "bootstrap": "^5.1.0",
     "devextreme": "^22.2.4",
     "devextreme-angular": "^22.2.4",

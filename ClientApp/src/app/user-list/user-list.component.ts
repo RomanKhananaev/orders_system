@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoadIndicatorService } from '../services/load-indicator.service';
 import { UserApiService } from '../services/user-api.service';
 
@@ -18,7 +19,18 @@ export class UserListComponent implements OnInit {
   ];
   constructor(private userService: UserApiService,
     public loadIndicator: LoadIndicatorService,
-    private router: Router  ) { }
+    private router: Router,
+    private jwtHelper: JwtHelperService  ) { }
+
+  isUserAuthenticated() {
+    const token: any = localStorage.getItem("jwt");
+    if (token && this.jwtHelper.isTokenExpired(token)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   ngOnInit(): void {
     this.userService.GetUsersByRole(1).subscribe(res => {

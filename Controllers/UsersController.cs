@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using orders_system.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace orders_system.Controllers
 {
@@ -26,11 +31,23 @@ namespace orders_system.Controllers
                 return BadRequest("User name or password wrong");
             }
 
-            return Ok(user);
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+            var singingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+            var tokenOptions = new JwtSecurityToken(
+                issuer: "https://localhost:7269",
+                audience: "https://localhost:7269",
+                claims: new List<Claim>(),
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: singingCredentials
+                );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return Ok(new {Token = tokenString, Name = user.UserName});
 
         }
 
         [HttpPost("GetUsersByRole/{roleId}")]
+        [Authorize]
         public async Task<ActionResult> GetUsersByRole(int roleId)
         {
             var role = _db.UserRoleTypes.FirstOrDefault(x => x.Id == roleId);
@@ -50,6 +67,7 @@ namespace orders_system.Controllers
         }
 
         [HttpPost("GetOrders/{userId}")]
+        [Authorize]
         public async Task<ActionResult> GetOrders(int userId)
         {
             var user = _db.Users.FirstOrDefault(x => x.Id == userId);
@@ -68,6 +86,7 @@ namespace orders_system.Controllers
             return Ok(ordersList);
         }
         [HttpPost("GetOrdersSum")]
+        [Authorize]
         public async Task<ActionResult> GetOrdersSum(OrdersSumDTO ordersSumDTO)
         {
             var user = _db.Users.FirstOrDefault(x => x.Id == ordersSumDTO.userId);
