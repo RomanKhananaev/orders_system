@@ -8,12 +8,15 @@ import { Router } from '@angular/router';
 })
 export class NavMenuComponent {
   isExpanded = false;
-  loggedUserName: any;
+  loggedUser: any;
+  loggedUserStr: any;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.loggedUserName = localStorage.getItem("name");
+    this.loggedUserStr = localStorage.getItem("user");
+    this.loggedUser = JSON.parse(this.loggedUserStr);
+/*    console.log("UserLogged: ", this.loggedUser);*/
   }
 
   collapse() {
@@ -26,7 +29,7 @@ export class NavMenuComponent {
 
   logOut() {
     localStorage.removeItem("jwt");
-    localStorage.removeItem("name");
+    localStorage.removeItem("user");
     this.router.navigate(['/login']);
   }
 }

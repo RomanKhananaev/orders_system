@@ -25,11 +25,13 @@ namespace orders_system.Models
                 entity.HasOne(d => d.UserRole)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.UserRoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Users_Orders");
 
                 entity.HasOne(d => d.UserRoleNavigation)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.UserRoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Users_UserRoleTypes");
             });
 

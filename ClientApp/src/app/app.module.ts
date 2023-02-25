@@ -9,7 +9,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DevExtremeModule } from 'devextreme-angular';
 import { UserListComponent } from './user-list/user-list.component';
@@ -24,7 +23,6 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
     LoginComponent,
     UserListComponent,
     UserComponent,
@@ -35,7 +33,7 @@ export function tokenGetter() {
     FormsModule,
     DevExtremeModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'users', component: UserListComponent,canActivate: [AuthGuard] },
       { path: 'users/:userId', component: UserComponent, canActivate: [AuthGuard] },

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using orders_system.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -40,9 +41,17 @@ namespace orders_system.Controllers
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: singingCredentials
                 );
+            var userDto = new userDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                UserRole = user.UserRoleId == 1? "Admin":"User",
+            };
+            
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new {Token = tokenString, Name = user.UserName});
+            return Ok(new {Token = tokenString, User = userDto });
 
         }
 
@@ -115,6 +124,13 @@ namespace orders_system.Controllers
         public string Password { get; set; }
     }
 
+    public struct userDto
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string UserRole { get; set; }
+    }
     public struct OrdersSumDTO
     {
         public int userId { get; set; }

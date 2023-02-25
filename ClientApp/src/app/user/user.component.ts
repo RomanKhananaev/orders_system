@@ -15,11 +15,15 @@ export class UserComponent implements OnInit {
   loadedOrders: any;
   fromDate: any;
   toDate: any;
+  loggedUserStr: any;
+  loggedUser: any;
   orderSum = 0;
   constructor(private route: ActivatedRoute, private userService: UserApiService) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['userId'];
+    this.loggedUserStr = localStorage.getItem("user");
+    this.loggedUser = JSON.parse(this.loggedUserStr);
   }
 
   GetOrderSum() {

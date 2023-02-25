@@ -23,13 +23,13 @@ namespace orders_system.Models
         [StringLength(50)]
         public string Password { get; set; } = null!;
         [Column("user_role_id")]
-        public int? UserRoleId { get; set; }
+        public int UserRoleId { get; set; }
 
         [ForeignKey("UserRoleId")]
         [InverseProperty("Users")]
-        public virtual Order? UserRole { get; set; }
+        public virtual Order UserRole { get; set; } = null!;
         [ForeignKey("UserRoleId")]
         [InverseProperty("Users")]
-        public virtual UserRoleType? UserRoleNavigation { get; set; }
+        public virtual UserRoleType UserRoleNavigation { get; set; } = null!;
     }
 }

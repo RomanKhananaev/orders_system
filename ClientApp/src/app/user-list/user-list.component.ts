@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
 
   isUserAuthenticated() {
     const token: any = localStorage.getItem("jwt");
-    if (token && this.jwtHelper.isTokenExpired(token)) {
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
       return true;
     }
     else {
