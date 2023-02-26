@@ -22,6 +22,9 @@ namespace orders_system.Models
         public DateTime Date { get; set; }
         [Column("total_price")]
         public double TotalPrice { get; set; }
+        [Column("description")]
+        [StringLength(50)]
+        public string? Description { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
 

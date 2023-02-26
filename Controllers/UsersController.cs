@@ -112,6 +112,7 @@ namespace orders_system.Controllers
                     x.Id,
                     x.Date,
                     x.TotalPrice,
+                    x.Description
                 })
                 .ToList();
             return Ok(ordersList);
