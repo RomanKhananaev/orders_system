@@ -37,7 +37,7 @@ All pages have Nav-menu at the top with users page, logged user's full name and 
 [<img src="https://img.youtube.com/vi/KFcxtcoJquo/0.jpg" width="100%">](https://www.youtube.com/watch?v=KFcxtcoJquo "Short clip of the app")
 
 <a href="https://ibb.co/0h952Pp"><img src="https://i.ibb.co/Tm0y2zD/login.png" alt="login" border="0" style="width:32%"></a>
-<a href="https://ibb.co/fxG8fRL"><img src="https://i.ibb.co/JsFxVLg/user.png" alt="user" border="0" style="width:32%"></a>
+<a href="https://ibb.co/fxG8fRL"><img src="https://i.ibb.co/JsFxVLg/user.png" alt="user" border="0" style="width:34%"></a>
 <a href="https://ibb.co/YDd7SKG"><img src="https://i.ibb.co/9w490fj/userlist.png" alt="userlist" border="0" style="width:32%"></a>
 
 
