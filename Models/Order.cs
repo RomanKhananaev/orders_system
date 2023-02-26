@@ -25,6 +25,9 @@ namespace orders_system.Models
         [Column("description")]
         [StringLength(50)]
         public string? Description { get; set; }
+        [Column("seller_name")]
+        [StringLength(50)]
+        public string? SellerName { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
 

@@ -37,7 +37,8 @@ export class UserComponent implements OnInit {
             id: item.id,
             date: new Date(item.date),
             totalPrice: item.totalPrice,
-            description: item.description
+            description: item.description,
+            sellerName: item.sellerName
           }
           obj.date.setTime(obj.date.getTime() + 2 * 60 * 60 * 1000)
           return obj
