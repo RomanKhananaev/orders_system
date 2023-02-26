@@ -1,7 +1,5 @@
 
 ## Orders system
-[![Orders system](https://img.youtube.com/vi/KFcxtcoJquo/0.jpg)](https://www.youtube.com/watch?v=KFcxtcoJquo)
-
 ### FrontEnd - Angular
 #### Pages
 * Login - Login form that send the username and password to the server using `Login(LoginFormObj)`
@@ -35,7 +33,8 @@ All pages have Nav-menu at the top with users page, logged user's full name and 
 
 <a href="https://ibb.co/Ypj52F2"><img src="https://i.ibb.co/2gKzq1q/DB.png" alt="DB" border="0"></a>
 - - - -
-### Screenshots
+### Screenshots and video
+[![Orders system](https://img.youtube.com/vi/KFcxtcoJquo/0.jpg)](https://www.youtube.com/watch?v=KFcxtcoJquo)
 <a href="https://ibb.co/0h952Pp"><img src="https://i.ibb.co/Tm0y2zD/login.png" alt="login" border="0" style="width:33%"></a>
 <a href="https://ibb.co/fxG8fRL"><img src="https://i.ibb.co/JsFxVLg/user.png" alt="user" border="0" style="width:33%"></a>
 <a href="https://ibb.co/YDd7SKG"><img src="https://i.ibb.co/9w490fj/userlist.png" alt="userlist" border="0" style="width:33%"></a>
