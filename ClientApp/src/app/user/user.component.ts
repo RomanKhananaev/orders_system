@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import notify from 'devextreme/ui/notify';
 import { UserApiService } from '../services/user-api.service';
-import {map} from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 import { formatDate } from 'devextreme/localization';
 
 @Component({
@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
   selectedUser: any;
   userId: any;
   loadedOrders: any;
+  presentOrders: any;
   fromDate: any;
   toDate: any;
 
@@ -28,6 +29,27 @@ export class UserComponent implements OnInit {
     }
     this.selectedUser = JSON.parse(this.selectedUser);
     localStorage.setItem("selectedUser", "null");
+
+    this.userService.GetOrders(this.userId)
+      .pipe(
+        map((res: any) => res.map((item: any) => {
+          let obj = {
+            id: item.id,
+            date: new Date(item.date),
+            totalPrice: item.totalPrice,
+          }
+          obj.date.setTime(obj.date.getTime() + 2 * 60 * 60 * 1000)
+          return obj
+        }))
+      )
+      .subscribe(res => {
+        this.loadedOrders = res;
+        this.presentOrders = res;
+        this.orderSum = 0;
+        //console.log("User orders: ", this.loadedOrders);
+      }, err => {
+        notify("Error with orders loading", 'error', 3000);
+      })
   }
 
   GetOrderSum() {
@@ -45,36 +67,17 @@ export class UserComponent implements OnInit {
         to: this.toDate,
       }
       this.userService.GetOrdersSum(OrderSumObj).subscribe(res => {
-        console.log("Result: ", res);
-        this.loadedOrders = res;
-        for (let x in res) {
-          console.log(res[x]);
-          this.orderSum += res[x].totalPrice;
-        }
+        //console.log("Result: ", res);
+        this.orderSum = res;
+        this.presentOrders = this.loadedOrders.filter((x: any) => x.date.getTime() >= Date.parse(this.fromDate) && x.date.getTime() <= Date.parse(this.toDate))
+        //console.log("Present: ", this.presentOrders)
       }, err => {
         notify("Error with summaring orders", 'error', 3000);
       })
     }
   }
-
-  GetOrders() {
-    this.userService.GetOrders(this.userId)
-      .pipe(
-        map((res: any) => res.map((item: any) => {
-          let obj = {
-            id: item.id,
-            date: formatDate(new Date(item.date), 'dd/MM/yyyy'),
-            totalPrice: item.totalPrice,
-          }
-          return obj
-        }))
-      )
-      .subscribe(res => {
-        this.loadedOrders = res;
-        this.orderSum = 0;
-        //console.log("User orders: ", this.loadedOrders);
-      }, err => {
-        notify("Error with user loading", 'error', 3000);
-      })
+  ClearFilter() {
+    this.presentOrders = this.loadedOrders;
   }
+
 }

@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    console.log("Form data: ", this.loginUser);
+    //console.log("Form data: ", this.loginUser);
     this.userService.Login(this.loginUser).subscribe(res => {
-      console.log(">> Login Result: ", res);
+      //console.log(">> Login Result: ", res);
       const token = res.token;
       const user = JSON.stringify(res.user);
 

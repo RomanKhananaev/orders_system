@@ -128,12 +128,15 @@ namespace orders_system.Controllers
             var orderList = _db.Orders.Where(x => x.UserId == ordersSumDTO.userId && x.Date >= ordersSumDTO.From && x.Date <= ordersSumDTO.To)
                .Select(x => new
                {
-                   x.Id,
-                   x.Date,
                    x.TotalPrice,
                })
                 .ToList();
-            return Ok(orderList);
+            var sum = 0.0;
+            foreach (var order in orderList)
+            {
+                sum += order.TotalPrice;
+            }
+            return Ok(sum);
         }
 
     }
