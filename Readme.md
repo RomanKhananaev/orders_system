@@ -33,7 +33,7 @@ All pages have Nav-menu at the top with users page, logged user's full name and 
 
 <a href="https://ibb.co/Ypj52F2"><img src="https://i.ibb.co/2gKzq1q/DB.png" alt="DB" border="0"></a>
 - - - -
-### Screenshots and video
+### Video and Screenshots
 [<img src="https://img.youtube.com/vi/KFcxtcoJquo/0.jpg" width="100%">](https://www.youtube.com/watch?v=KFcxtcoJquo "Short clip of the app")
 
 <a href="https://ibb.co/0h952Pp"><img src="https://i.ibb.co/Tm0y2zD/login.png" alt="login" border="0" style="width:33%"></a>
