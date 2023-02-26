@@ -20,15 +20,18 @@ namespace orders_system.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Orders_Users");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasOne(d => d.UserRole)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.UserRoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Users_Orders");
-
-                entity.HasOne(d => d.UserRoleNavigation)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.UserRoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

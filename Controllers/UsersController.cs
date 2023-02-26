@@ -25,22 +25,22 @@ namespace orders_system.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginForm>> Login(LoginForm loginForm)
+        public async Task<ActionResult<LoginFormObj>> Login(LoginFormObj loginFormObj)
         {
 
 
-            var user = _db.Users.FirstOrDefault(x => x.UserName == loginForm.UserName);
+            var user = _db.Users.FirstOrDefault(x => x.UserName == loginFormObj.UserName);
             if (user == null)
             {
                 return BadRequest("User name or password wrong");
             }
             //using var hmac = new HMACSHA512();
-            //user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginForm.Password));
+            //user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginFormObj.Password));
             //user.PasswordSalt = hmac.Key;
             //_db.SaveChanges();
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
-            var ComputedPassHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginForm.Password));
+            var ComputedPassHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginFormObj.Password));
             for (int ii = 0; ii < ComputedPassHash.Length; ii++)
             {
                 if (ComputedPassHash[ii] != user.PasswordHash[ii])
@@ -120,14 +120,14 @@ namespace orders_system.Controllers
         }
         [HttpPost("GetOrdersSum")]
         [Authorize]
-        public async Task<ActionResult> GetOrdersSum(OrdersSumDTO ordersSumDTO)
+        public async Task<ActionResult> GetOrdersSum(OrdersSumObj OrdersSumObj)
         {
-            var user = _db.Users.FirstOrDefault(x => x.Id == ordersSumDTO.userId);
+            var user = _db.Users.FirstOrDefault(x => x.Id == OrdersSumObj.userId);
             if (user == null)
             {
                 return BadRequest("User not found");
             }
-            var orderList = _db.Orders.Where(x => x.UserId == ordersSumDTO.userId && x.Date >= ordersSumDTO.From && x.Date <= ordersSumDTO.To)
+            var orderList = _db.Orders.Where(x => x.UserId == OrdersSumObj.userId && x.Date >= OrdersSumObj.From && x.Date <= OrdersSumObj.To)
                .Select(x => new
                {
                    x.TotalPrice,
@@ -145,13 +145,13 @@ namespace orders_system.Controllers
 
 
 
-    public struct LoginForm
+    public struct LoginFormObj
     {
         public string UserName { get; set; }
         public string Password { get; set; }
     }
 
-    public struct OrdersSumDTO
+    public struct OrdersSumObj
     {
         public int userId { get; set; }
         public DateTime From { get; set; }

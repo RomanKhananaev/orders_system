@@ -80,6 +80,7 @@ export class UserComponent implements OnInit {
   }
   ClearFilter() {
     this.presentOrders = this.loadedOrders;
+    this.orderSum = 0;
   }
 
 }

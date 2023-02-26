@@ -22,7 +22,7 @@ namespace orders_system.Models
         [StringLength(50)]
         public string Description { get; set; } = null!;
 
-        [InverseProperty("UserRoleNavigation")]
+        [InverseProperty("UserRole")]
         public virtual ICollection<User> Users { get; set; }
     }
 }

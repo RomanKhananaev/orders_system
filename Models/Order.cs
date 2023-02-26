@@ -10,11 +10,6 @@ namespace orders_system.Models
 {
     public partial class Order
     {
-        public Order()
-        {
-            Users = new HashSet<User>();
-        }
-
         [Key]
         [Column("id")]
         public int Id { get; set; }
@@ -31,7 +26,8 @@ namespace orders_system.Models
         [Column("user_id")]
         public int UserId { get; set; }
 
-        [InverseProperty("UserRole")]
-        public virtual ICollection<User> Users { get; set; }
+        [ForeignKey("UserId")]
+        [InverseProperty("Orders")]
+        public virtual User User { get; set; } = null!;
     }
 }
