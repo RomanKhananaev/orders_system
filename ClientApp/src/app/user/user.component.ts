@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import notify from 'devextreme/ui/notify';
 import { UserApiService } from '../services/user-api.service';
 import {map} from 'rxjs/operators'
@@ -11,19 +11,23 @@ import { formatDate } from 'devextreme/localization';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  selectedUser: any;
   userId: any;
   loadedOrders: any;
   fromDate: any;
   toDate: any;
-  loggedUserStr: any;
-  loggedUser: any;
+
   orderSum = 0;
-  constructor(private route: ActivatedRoute, private userService: UserApiService) { }
+  constructor(private route: ActivatedRoute, private userService: UserApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['userId'];
-    this.loggedUserStr = localStorage.getItem("user");
-    this.loggedUser = JSON.parse(this.loggedUserStr);
+    this.selectedUser = localStorage.getItem("selectedUser");
+    if (this.selectedUser == "null") {
+      this.router.navigate(['/users']);
+    }
+    this.selectedUser = JSON.parse(this.selectedUser);
+    localStorage.setItem("selectedUser", "null");
   }
 
   GetOrderSum() {

@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class LoginComponent implements OnInit {
   loginUser = {
-    userName: 'rom',
+    userName: 'rom.k',
     password: '15423562'
   }
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    //console.log("Form data: ", this.loginUser);
+    console.log("Form data: ", this.loginUser);
     this.userService.Login(this.loginUser).subscribe(res => {
       console.log(">> Login Result: ", res);
       const token = res.token;

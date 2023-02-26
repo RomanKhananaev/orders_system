@@ -13,9 +13,15 @@
                 [showBorders]="true"
                 (onCellClick)="openUser($event)">
 
-    <dxi-column dataField="id" alignment="left"></dxi-column>
-    <dxi-column dataField="userName"></dxi-column>
-    <dxi-column dataField="email"></dxi-column>
+    <dxi-column dataField="id" alignment="left" width="35px"></dxi-column>
+    <dxi-column dataField="userName" width="161px"></dxi-column>
+    <dxi-column dataField="firstName" width="150px"></dxi-column>
+    <dxi-column dataField="lastName" width="150px"></dxi-column>
+    <dxi-column dataField="email" width="150px"></dxi-column>
+    <dxi-column dataField="phoneNumber" width="130px"></dxi-column>
+    <dxi-column dataField="fax" width="130px"></dxi-column>
+    <dxi-column dataField="companyName"></dxi-column>
+    <dxi-column dataField="address" width="200px"></dxi-column>
   </dx-data-grid>
 </div>
 

@@ -1,6 +1,6 @@
 <app-nav-menu></app-nav-menu>
 <h1>User's info</h1>
-<dx-form id="form"
+<!--<dx-form id="form"
          [(formData)]="loggedUser"
          [readOnly]="true"
          [labelMode]="'floating'"
@@ -8,54 +8,98 @@
          [labelLocation]="'left'"
          [minColWidth]="300"
          [colCount]="2"
-         ></dx-form>
-
-<h1>User's orders</h1>
-<div class="row mb-2">
-  <div class="col-2">
-    <div class="dx-field">
-      <div class="dx-field-label">From</div>
-      <div class="dx-field-value">
-        <dx-date-box [(value)]="fromDate" type="date" displayFormat="dd/MM/yyyy" dateSerializationFormat="yyyy-MM-dd"> </dx-date-box>
-      </div>
-    </div>
-  </div>
-  <div class="col-2">
-    <div class="dx-field">
-      <div class="dx-field-label">To</div>
-      <div class="dx-field-value">
-        <dx-date-box [(value)]="toDate" type="date" displayFormat="dd/MM/yyyy" dateSerializationFormat="yyyy-MM-dd"> </dx-date-box>
-      </div>
-    </div>
-  </div>
-  <div class="col-4">
-    <dx-button stylingMode="contained"
-               text="GetOrderSum"
-               [width]="150"
-               (onClick)="GetOrderSum()">
-    </dx-button>
-  </div>
-  <div class="col-4">
-    <dx-button stylingMode="contained"
-               text="GetOrders"
-               [width]="120"
-               (onClick)="GetOrders()"
-               class="right">
-    </dx-button>
-  </div>
+         ></dx-form>-->
+<div id="form-container">
+  <dx-form id="form" [colCount]="3" [formData]="selectedUser">
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="firstName" [editorOptions]="{ readOnly: true }"></dxi-item>
+        <dxi-item dataField="phoneNumber" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="lastName" [editorOptions]="{ readOnly: true }"></dxi-item>
+        <dxi-item dataField="email" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="userName" [editorOptions]="{ readOnly: true }"></dxi-item>
+        <dxi-item dataField="fax" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+  <dx-form class="mt-2" id="form" [colCount]="4" [formData]="selectedUser">
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="companyName" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="address" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="id" lable="User ID" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item dataField="userRoleId" [editorOptions]="{ readOnly: true }"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
 </div>
 
-<dx-data-grid id="gridContainer"
-              [dataSource]="loadedOrders"
-              [remoteOperations]="false"
-              [allowColumnReordering]="true"
-              [rowAlternationEnabled]="false"
-              [showBorders]="true">
+  <h1>User's orders</h1>
+  <div class="row mb-2">
+    <div class="col-2">
+      <div class="dx-field">
+        <div class="dx-field-label">From</div>
+        <div class="dx-field-value">
+          <dx-date-box [(value)]="fromDate" type="date" displayFormat="dd/MM/yyyy" dateSerializationFormat="yyyy-MM-dd"> </dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="dx-field">
+        <div class="dx-field-label">To</div>
+        <div class="dx-field-value">
+          <dx-date-box [(value)]="toDate" type="date" displayFormat="dd/MM/yyyy" dateSerializationFormat="yyyy-MM-dd"> </dx-date-box>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <dx-button stylingMode="contained"
+                 text="GetOrderSum"
+                 [width]="150"
+                 (onClick)="GetOrderSum()">
+      </dx-button>
+    </div>
+    <div class="col-4">
+      <dx-button stylingMode="contained"
+                 text="GetOrders"
+                 [width]="120"
+                 (onClick)="GetOrders()"
+                 class="right">
+      </dx-button>
+    </div>
+  </div>
 
-  <dxi-column dataField="id" alignment="left" caption="No"></dxi-column>
-  <dxi-column dataField="date" dataType="date" format="dd/MM/yyyy"></dxi-column>
-  <dxi-column dataField="totalPrice" alignment="left"></dxi-column>
-</dx-data-grid>
-<div class="mt-2 ml-2" *ngIf="orderSum != 0">
-  Get Orders Sum: {{orderSum}}
-</div>
+  <dx-data-grid id="gridContainer"
+                [dataSource]="loadedOrders"
+                [remoteOperations]="false"
+                [allowColumnReordering]="true"
+                [rowAlternationEnabled]="false"
+                [showBorders]="true">
+
+    <dxi-column dataField="id" alignment="left" caption="No"></dxi-column>
+    <dxi-column dataField="date" dataType="date" format="dd/MM/yyyy"></dxi-column>
+    <dxi-column dataField="totalPrice" alignment="left"></dxi-column>
+  </dx-data-grid>
+  <div class="mt-2 ml-2" *ngIf="orderSum != 0">
+    Get Orders Sum: {{orderSum}}
+  </div>

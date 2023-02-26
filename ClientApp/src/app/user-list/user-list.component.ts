@@ -47,6 +47,7 @@ export class UserListComponent implements OnInit {
   }
   openUser(e: any) {
     if (e.columnIndex == 0 && e.rowType == 'data') {
+      localStorage.setItem("selectedUser", JSON.stringify(e.data));
       this.router.navigate(['/users/' + e.value]);
     }
   }

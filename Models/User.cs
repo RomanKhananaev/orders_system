@@ -16,14 +16,35 @@ namespace orders_system.Models
         [Column("user_name")]
         [StringLength(50)]
         public string UserName { get; set; } = null!;
+        [Column("first_name")]
+        [StringLength(50)]
+        public string? FirstName { get; set; }
+        [Column("last_name")]
+        [StringLength(50)]
+        public string? LastName { get; set; }
         [Column("email")]
         [StringLength(50)]
         public string Email { get; set; } = null!;
-        [Column("password")]
+        [Column("phone_number")]
         [StringLength(50)]
-        public string Password { get; set; } = null!;
+        public string? PhoneNumber { get; set; }
+        [Column("fax")]
+        [StringLength(50)]
+        public string? Fax { get; set; }
+        [Column("company_name")]
+        [StringLength(50)]
+        public string? CompanyName { get; set; }
+        [Column("address")]
+        [StringLength(50)]
+        public string? Address { get; set; }
         [Column("user_role_id")]
         public int UserRoleId { get; set; }
+        [Column("password_hash")]
+        [MaxLength(256)]
+        public byte[]? PasswordHash { get; set; }
+        [Column("password_salt")]
+        [MaxLength(256)]
+        public byte[]? PasswordSalt { get; set; }
 
         [ForeignKey("UserRoleId")]
         [InverseProperty("Users")]

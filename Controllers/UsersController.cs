@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using orders_system.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace orders_system.Controllers
@@ -26,11 +27,28 @@ namespace orders_system.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<LoginForm>> Login(LoginForm loginForm)
         {
+
+
             var user = _db.Users.FirstOrDefault(x => x.UserName == loginForm.UserName);
-            if (user == null || user.Password != loginForm.Password)
+            if (user == null)
             {
                 return BadRequest("User name or password wrong");
             }
+            //using var hmac = new HMACSHA512();
+            //user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginForm.Password));
+            //user.PasswordSalt = hmac.Key;
+            //_db.SaveChanges();
+
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var ComputedPassHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginForm.Password));
+            for (int ii = 0; ii < ComputedPassHash.Length; ii++)
+            {
+                if (ComputedPassHash[ii] != user.PasswordHash[ii])
+                {
+                    return BadRequest("User name or password wrong");
+                }
+            }
+
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
             var singingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -41,17 +59,14 @@ namespace orders_system.Controllers
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: singingCredentials
                 );
-            var userDto = new userDto
-            {
-                Id = user.Id,
-                Email = user.Email,
-                UserName = user.UserName,
-                UserRole = user.UserRoleId == 1? "Admin":"User",
-            };
-            
+            user.PasswordHash = null;
+            user.PasswordSalt = null;
+
+
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new {Token = tokenString, User = userDto });
+            return Ok(new { Token = tokenString, User = user });
+
 
         }
 
@@ -69,7 +84,14 @@ namespace orders_system.Controllers
                 {
                     x.Id,
                     x.UserName,
-                    x.Email
+                    x.FirstName,
+                    x.LastName,
+                    x.Email,
+                    x.PhoneNumber,
+                    x.Fax,
+                    x.CompanyName,
+                    x.Address,
+                    x.UserRoleId,
                 })
                 .ToList();
             return Ok(userList);
@@ -124,13 +146,6 @@ namespace orders_system.Controllers
         public string Password { get; set; }
     }
 
-    public struct userDto
-    {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string UserRole { get; set; }
-    }
     public struct OrdersSumDTO
     {
         public int userId { get; set; }

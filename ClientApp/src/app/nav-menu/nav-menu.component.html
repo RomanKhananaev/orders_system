@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Hi {{loggedUser.userName}}, wellcom back</a>
+      <a class="navbar-brand" [routerLink]="['/']">{{loggedUser.firstName}} {{loggedUser.lastName}}, wellcom back</a>
       <button
         class="navbar-toggler"
         type="button"
